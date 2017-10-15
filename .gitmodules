@@ -1,0 +1,3 @@
+[submodule "chess-web"]
+	path = chess-web
+	url = https://github.com/augustinbarbe/chess-web
