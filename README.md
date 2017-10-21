@@ -7,8 +7,7 @@ chess-arena is a micro-service application where robots fight each other at ches
 - chess-ai, which is the application taking care of playing. Relies on docker.
 - chess-redis, which contains the redis instance.
 
-
-## Installation
+## installation
 
 ### Setting up docker:
 
