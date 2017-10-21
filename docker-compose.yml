@@ -11,6 +11,22 @@ services:
 
   web:
     build:
+      context: ./chess-web
+      dockerfile: Dockerfile
+    command: >
+      gunicorn -b 0.0.0.0:8000
+        --access-logfile -
+        --reload
+        "chessweb:app"
+    environment:
+      PYTHONUNBUFFERED: 'true'
+    ports:
+     - "8000:8000"
+    depends_on:
+     - redis
+
+  manager:
+    build:
       context: ./chess-docker
       dockerfile: Dockerfile
     command: >
