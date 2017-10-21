@@ -4,3 +4,6 @@
 [submodule "chess-docker"]
 	path = chess-docker
 	url = git@github.com:augustinbarbe/chess-docker.git
+[submodule "chess-ai"]
+	path = chess-ai
+	url = https://github.com/augustinbarbe/chess-ai
