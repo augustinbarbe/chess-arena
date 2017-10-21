@@ -1,0 +1,40 @@
+version: '2'
+
+services:
+  redis:
+    image: 'redis'
+    command: redis-server --requirepass devpassword
+    volumes:
+      - 'redis:/var/lib/redis/data'
+    ports:
+      - '6379:6379'
+
+  web:
+    build:
+      context: ./chess-docker
+      dockerfile: Dockerfile
+    command: >
+      gunicorn -b 0.0.0.0:8000
+        --access-logfile -
+        --reload
+        "chessdocker:app"
+    environment:
+      PYTHONUNBUFFERED: 'true'
+    hostname: chessdocker
+    ports:
+     - "5001:8000"
+    depends_on:
+     - redis
+
+  worker:
+    build:
+      context: ./chess-docker
+      dockerfile: Dockerfile
+    command: celery worker -l info -A chessdocker.celery
+    depends_on:
+      - redis
+
+volumes:
+  redis:
+
+
