@@ -11,9 +11,7 @@ chess-arena is a micro-service application where robots fight each other at ches
 
 ### Setting up docker:
 
-Because one of the services needs to interact with the docker daemon, you need to enable TLS in order to enable a safe communication with this service.
-
-Docker provides a nice documentation on how to do this:
+Because one of the services needs to interact with the docker daemon, the socker daemon need to be mounted in it. While this is not really a proper thing to do, this is
 
 https://docs.docker.com/engine/security/https/
 

@@ -20,6 +20,8 @@ services:
         "chessweb:app"
     environment:
       PYTHONUNBUFFERED: 'true'
+    links:
+       - manager:chessdocker
     ports:
      - "8000:8000"
     depends_on:
@@ -30,7 +32,7 @@ services:
       context: ./chess-docker
       dockerfile: Dockerfile
     command: >
-      gunicorn -b 0.0.0.0:8000
+      gunicorn -b 0.0.0.0:5001
         --access-logfile -
         --reload
         "chessdocker:app"
@@ -38,7 +40,7 @@ services:
       PYTHONUNBUFFERED: 'true'
     hostname: chessdocker
     ports:
-     - "5001:8000"
+     - "5001:5001"
     depends_on:
      - redis
 
@@ -46,6 +48,8 @@ services:
     build:
       context: ./chess-docker
       dockerfile: Dockerfile
+    volumes: 
+      - /var/run/docker.sock:/var/run/docker.sock
     command: celery worker -l info -A chessdocker.celery
     depends_on:
       - redis
