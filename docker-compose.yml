@@ -54,12 +54,6 @@ services:
     depends_on:
       - redis
 
-  ai:
-    build:
-      context: ./chess-ai
-      dockerfile: Dockerfile
-    depends_on:
-      - redis
       
 volumes:
   redis:
